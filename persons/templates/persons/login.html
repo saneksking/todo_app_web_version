@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail: </label>
+    <input type="text" class="form-control" id="email" name="email">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль:</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Войти</button>
+</form>
+{% endblock %}
+{% block js %}
+    <script>
+
+    </script>
+{% endblock %}
