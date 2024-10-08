@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя {{ person.full_name }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center display-4" style="color: blue">Профиль пользователя {{ person.email }}</h1>
+    <hr>
+    <ul class="list-group">
+        <li class="list-group-item">Почта: {{ person.email }}</li>
+        <li class="list-group-item">Имя и фамилия: {{ person.full_name }}</li>
+        <li class="list-group-item">Задачи: В разработке...</li>
+        <li class="list-group-item">Телеграм ID: {{ person.tg_id }}</li>
+    </ul>
+{% endblock %}

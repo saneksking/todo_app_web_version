@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from persons.forms import SignUpForm
+from persons.models import Person
 
 
 def login_view(request):
@@ -19,7 +21,7 @@ def login_view(request):
                 'text': f'{user.full_name}. Добро пожаловать в ToDo App Web'
             }
             request.session['message'] = message
-            return redirect('main:home')
+            return redirect('persons:profile')
         else:
             message = {
                 'type': 'danger',
@@ -66,3 +68,14 @@ def register(request):
         'message': message
     }
     return render(request, 'persons/register.html', context)
+
+
+@login_required
+def profile(request, person_id):
+    message = request.session.pop('message', None)
+    person = Person.objects.get(pk=person_id)
+    context = {
+        'message': message,
+        'person': person
+    }
+    return render(request, 'persons/profile.html', context)
