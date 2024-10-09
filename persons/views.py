@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from persons.forms import SignUpForm
+from persons.forms import SignUpForm, CreateToDoForm
 from persons.models import Person, ToDo
 
 
@@ -82,13 +82,33 @@ def profile(request, person_id):
 
 
 @login_required
-def person_todo_list(request, person_id):
+def person_todo_list(request):
     message = request.session.pop('message', None)
-    todo_list = ToDo.objects.filter(person=person_id)
-    person = Person.objects.get(pk=person_id)
+    person = Person.objects.get(pk=request.user.id)
+    todo_list = ToDo.objects.filter(person=person.id)
     context = {
         'todo_list': todo_list,
         'message': message,
         'person': person
     }
     return render(request, 'persons/todo_list.html', context)
+
+
+@login_required
+def create_todo(request):
+    form = CreateToDoForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            new_task = form.save(commit=False)
+            new_task.person_id = request.user.id
+            new_task.save()
+            message = {
+                'type': 'success',
+                'text': f'Задача была успешно создана!'
+            }
+            request.session['message'] = message
+            return redirect('persons:todo_list')
+    context = {
+        'form': form
+    }
+    return render(request, 'persons/create_todo.html', context)

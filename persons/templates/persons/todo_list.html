@@ -5,38 +5,38 @@
 {% block content %}
     <h1 class="text-center display-4">Список задач пользователя {{ person.email }}</h1>
     <hr>
-    <a href="" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Создать задачу">Создать +</a>
+    <a href="{% url 'persons:create_todo' %}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Создать задачу">Создать +</a>
     <hr>
     <div class="table-responsive">
         <table class="table table-bordered table-hover" id="Profiles">
             <thead>
-            <tr class="table-primary">
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Описание</th>
-                <th scope="col">Статус</th>
-                <th scope="col">Дата создания</th>
-                <th scope="col">Дата обновления</th>
-                <th scope="col">Действия</th>
-            </tr>
+                <tr class="table-primary">
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Дата обновления</th>
+                    <th scope="col">Действия</th>
+                </tr>
             </thead>
             <tbody>
-            {% for todo in todo_list %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ todo.title }}</td>
-                    <td>{{ todo.description|truncatechars:30 }}</td>
-                    <td>{% if todo.status %}<a onclick="return confirm('Выполнить задачу?')" href=""><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Выполнить"></i></a>{% else %}<a onclick="return confirm('Сделать не выполненой?')" href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Сделать не выполненой"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
-                    <td>{{ todo.created_at }}</td>
-                    <td>{{ todo.updated_at }}</td>
-                    <td>
-                        <div class="btn-group btn-group" role="group" aria-label="Basic example">
-                            <a href="" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
-                            <a onclick="return confirm('Вы действительно хотите удалить задачу?')" href="" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
+                {% for todo in todo_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ todo.title }}</td>
+                        <td>{{ todo.description|truncatechars:30 }}</td>
+                        <td>{% if todo.status %}<a onclick="return confirm('Выполнить задачу?')" href=""><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Выполнить"></i></a>{% else %}<a onclick="return confirm('Сделать не выполненой?')" href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Сделать не выполненой"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
+                        <td>{{ todo.created_at }}</td>
+                        <td>{{ todo.updated_at }}</td>
+                        <td>
+                            <div class="btn-group btn-group" role="group" aria-label="Basic example">
+                                <a href="" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
+                                <a onclick="return confirm('Вы действительно хотите удалить задачу?')" href="" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

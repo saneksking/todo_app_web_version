@@ -25,7 +25,7 @@
                                          <a class="dropdown-item" href="{% url 'persons:profile' request.user.id %}">Профиль</a>
                                      </li>
                                      <li>
-                                         <a class="dropdown-item" href="{% url 'persons:todo_list' request.user.id %}">Задачи</a>
+                                         <a class="dropdown-item" href="{% url 'persons:todo_list' %}">Задачи</a>
                                      </li>
                                      <li>
                                          <a class="dropdown-item" href="{% url 'persons:logout' %}">Выход</a>
@@ -53,12 +53,10 @@
             {% endif %}
             {% block content %}
             {% endblock %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            {% block js %}
+            {% endblock %}
         </div>
     </body>
-    <script>
-        {% block js %}
-        {% endblock %}
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </html>

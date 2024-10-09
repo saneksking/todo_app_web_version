@@ -1,5 +1,5 @@
 from django import forms
-from persons.models import Person
+from persons.models import Person, ToDo
 
 
 class SignUpForm(forms.ModelForm):
@@ -15,3 +15,13 @@ class SignUpForm(forms.ModelForm):
         if cd['password'] != cd['password_2']:
             raise forms.ValidationError('Passwords dont\' match!')
         return cd['password_2']
+
+
+class CreateToDoForm(forms.ModelForm):
+    class Meta:
+        model = ToDo
+        fields = ['title', 'description']
+        labels = {
+            'title': 'Название',
+            'description': 'Описание'
+        }
