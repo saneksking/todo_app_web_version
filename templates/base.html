@@ -21,7 +21,12 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">Menu</a>
                                  <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                     <li><a class="dropdown-item" href="{% url 'persons:profile' request.user.id %}">Профиль</a></li>
+                                     <li>
+                                         <a class="dropdown-item" href="{% url 'persons:profile' request.user.id %}">Профиль</a>
+                                     </li>
+                                     <li>
+                                         <a class="dropdown-item" href="{% url 'persons:todo_list' request.user.id %}">Задачи</a>
+                                     </li>
                                      <li>
                                          <a class="dropdown-item" href="{% url 'persons:logout' %}">Выход</a>
                                      </li>

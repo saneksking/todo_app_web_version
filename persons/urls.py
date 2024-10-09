@@ -11,5 +11,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register, name='register'),
     path('profile/<int:person_id>/', views.profile, name='profile'),
-
+    path('todo-list/<person_id>/', views.person_todo_list, name='todo_list'),
 ]

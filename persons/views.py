@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from persons.forms import SignUpForm
-from persons.models import Person
+from persons.models import Person, ToDo
 
 
 def login_view(request):
@@ -21,7 +21,7 @@ def login_view(request):
                 'text': f'{user.full_name}. Добро пожаловать в ToDo App Web'
             }
             request.session['message'] = message
-            return redirect('persons:profile')
+            return redirect('main:home')
         else:
             message = {
                 'type': 'danger',
@@ -79,3 +79,16 @@ def profile(request, person_id):
         'person': person
     }
     return render(request, 'persons/profile.html', context)
+
+
+@login_required
+def person_todo_list(request, person_id):
+    message = request.session.pop('message', None)
+    todo_list = ToDo.objects.filter(person=person_id)
+    person = Person.objects.get(pk=person_id)
+    context = {
+        'todo_list': todo_list,
+        'message': message,
+        'person': person
+    }
+    return render(request, 'persons/todo_list.html', context)
