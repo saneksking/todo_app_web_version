@@ -22,11 +22,11 @@
             </thead>
             <tbody>
                 {% for todo in todo_list %}
-                    <tr>
+                    <tr class="table-{% if todo.status %}success{% else %}danger    {% endif %}">
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ todo.title }}</td>
                         <td>{{ todo.description|truncatechars:30 }}</td>
-                        <td>{% if todo.status %}<a onclick="return confirm('Выполнить задачу?')" href=""><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Выполнить"></i></a>{% else %}<a onclick="return confirm('Сделать не выполненой?')" href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Сделать не выполненой"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
+                        <td>{% if todo.status %}<a onclick="return confirm('Пометить задачу невыполенной?')" href="{% url 'persons:change_todo_status' todo.id %}"><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Выполнить"></i></a>{% else %}<a onclick="return confirm('Выполнить задачу?')" href="{% url "persons:change_todo_status" todo.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Сделать не выполненой"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
                         <td>{{ todo.created_at }}</td>
                         <td>{{ todo.updated_at }}</td>
                         <td>

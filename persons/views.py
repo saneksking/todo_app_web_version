@@ -145,3 +145,22 @@ def update_todo(request, todo_id):
         'form': form,
     }
     return render(request, 'persons/update_todo.html', context)
+
+
+@login_required
+def change_todo_status(request, todo_id):
+    todo = ToDo.objects.get(pk=todo_id)
+    todo.status = not todo.status
+    todo.save()
+    if todo.status:
+        message = {
+            'type': 'success',
+            'text': f'Задача была успешно выполнена!'
+        }
+    else:
+        message = {
+            'type': 'success',
+            'text': f'Задача была успешно помечена невыполненной!'
+        }
+    request.session['message'] = message
+    return redirect('persons:todo_list')
