@@ -112,3 +112,36 @@ def create_todo(request):
         'form': form
     }
     return render(request, 'persons/create_todo.html', context)
+
+
+@login_required
+def delete_todo(request, todo_id):
+    todo = ToDo.objects.get(pk=todo_id)
+    todo.delete()
+    message = {
+        'type': 'success',
+        'text': f'Задача была успешно удалена!'
+    }
+    request.session['message'] = message
+    return redirect('persons:todo_list')
+
+
+@login_required
+def update_todo(request, todo_id):
+    todo = ToDo.objects.get(pk=todo_id)
+    form = CreateToDoForm(request.POST or None, instance=todo)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            message = {
+                'type': 'success',
+                'text': f'Задача была успешно изменена!'
+            }
+            request.session['message'] = message
+            return redirect('persons:todo_list')
+        else:
+            form = CreateToDoForm(request.POST)
+    context = {
+        'form': form,
+    }
+    return render(request, 'persons/update_todo.html', context)

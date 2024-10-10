@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Обновление задачи{% endblock %}
+
+{% block content %}
+    <h1 class="text-center display-4">Обновление задачи</h1>
+    <hr>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+{% endblock %}
+{% block js %}
+    <script>
+        $('#id_title, #id_description').addClass('form-control')
+    </script>
+{% endblock %}
