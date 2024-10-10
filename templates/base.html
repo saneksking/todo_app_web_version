@@ -15,6 +15,13 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <ul class="navbar-nav mv-auto">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'persons:todo_list' %}">Задачи <sup class="bdg bdg-dark">{{ todo_count  }}</sup></a>
+                        </li>
+                    {% endif %}
+                </ul>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-right: 25px">
                     <ul class="navbar-nav ms-auto">
                         {% if request.user.is_authenticated %}
@@ -25,7 +32,6 @@
                                          <a class="dropdown-item" href="{% url 'persons:profile' request.user.id %}">Профиль</a>
                                      </li>
                                      <li>
-                                         <a class="dropdown-item" href="{% url 'persons:todo_list' %}">Задачи</a>
                                      </li>
                                      <li>
                                          <a class="dropdown-item" href="{% url 'persons:logout' %}">Выход</a>
