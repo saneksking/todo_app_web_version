@@ -3,12 +3,12 @@
 {% block title %}Профиль пользователя {{ person.full_name }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-center display-4" style="color: blue">Профиль пользователя {{ person.email }}</h1>
+    <h1 class="text-center display-4">Профиль пользователя {{ person.email }}</h1>
     <hr>
-    <ul class="list-group">
-        <li class="list-group-item">Почта: {{ person.email }}</li>
-        <li class="list-group-item">Имя и фамилия: {{ person.full_name }}</li>
-        <li class="list-group-item">Задачи: В разработке...</li>
-        <li class="list-group-item">Телеграм ID: {{ person.tg_id }}</li>
+    <ul class="list-group col-6">
+        <li class="list-group-item"><b>E-mail:</b> <i class="text-primary">{{ person.email }}</i></li>
+        <li class="list-group-item"><b>Имя и фамилия:</b> <i class="text-primary">{{ person.full_name }}</i></li>
+        <li class="list-group-item"><b>Задачи:</b> <i class="text-primary">{{ todo_count }}</i></li>
+        <li class="list-group-item"><b>Телеграм ID:</b> <i class="text-primary">{% if person.tg_id == None or person.tg_id == '' %}Отсутствует{% else %}{{ person.tg_id }}{% endif %}</i></li>
     </ul>
 {% endblock %}
