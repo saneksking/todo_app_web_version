@@ -1,15 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
-from persons.forms import SignUpForm, CreateToDoForm
+from persons.forms import SignUpForm, CreateToDoForm, SettingsForm
 from persons.models import Person, ToDo
 
 
 def login_view(request):
     message = request.session.pop('message', None)
     if request.user.is_authenticated:
-        return redirect('persons:profile')
+        return redirect(reverse('persons:profile', args=(request.user.id, )))
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -164,3 +165,24 @@ def change_todo_status(request, todo_id):
         }
     request.session['message'] = message
     return redirect('persons:todo_list')
+
+
+@login_required
+def profile_settings(request):
+    person = Person.objects.get(pk=request.user.id)
+    form = SettingsForm(request.POST or None, instance=person)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            message = {
+                'type': 'success',
+                'text': f'Настройки были успешно применены!'
+            }
+            request.session['message'] = message
+            return redirect(reverse('persons:profile', args=(person.id, )))
+        else:
+            form = SettingsForm(request.POST)
+    context = {
+        'form': form
+    }
+    return render(request, 'persons/profile_settings.html', context)

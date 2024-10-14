@@ -25,3 +25,16 @@ class CreateToDoForm(forms.ModelForm):
             'title': 'Название',
             'description': 'Описание'
         }
+
+
+class SettingsForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = ['email', 'first_name', 'last_name', 'tg_id']
+        labels = {
+            'email': 'Email',
+            'first_name': 'Имя',
+            'tg_id': 'Телеграмм ID',
+            'last_name': 'Фамилия',
+
+        }
