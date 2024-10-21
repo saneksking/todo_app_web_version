@@ -18,7 +18,7 @@
                 <ul class="navbar-nav mv-auto">
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'persons:todo_list' %}">Задачи <sup class="bdg bdg-dark">{{ todo_count  }}</sup></a>
+                            <a class="nav-link" href="{% url 'persons:todo_list' %}">Задачи <sup class="bdg bdg-dark">{{ todo_count }}</sup></a>
                         </li>
                     {% endif %}
                 </ul>
@@ -31,6 +31,11 @@
                                      <li>
                                          <a class="dropdown-item" href="{% url 'persons:profile' request.user.id %}">Профиль</a>
                                      </li>
+                                     {% if request.user.is_superuser %}
+                                         <li>
+                                             <a class="dropdown-item" href="{% url 'admin_panel:admin_index' %}">Админ</a>
+                                         </li>
+                                     {% endif %}    
                                      <li>
                                          <a class="dropdown-item" href="{% url 'persons:profile_settings' %}">Настойки</a>
                                      </li>
