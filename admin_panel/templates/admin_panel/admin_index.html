@@ -5,5 +5,41 @@
 {% block content %}
     <h1 class="text-center display-4">Админ панель</h1>
     <hr>
-
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="Profiles">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">#</th>
+                    <th scope="col">Почта</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Активность</th>
+                    <th scope="col">Админ</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Telegram ID</th>
+                    <th scope="col">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in person_list %}
+                    <tr class="table-{% if person.is_active %}success{% else %}danger{% endif %}">
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ person.email }}</td>
+                        <td>{{ person.first_name }}</td>
+                        <td>{{ person.last_name }}</td>
+                        <td>{% if person.is_active %}<a onclick="return confirm('Заблокировать пользователя?')" href=""><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Заблокировать"></i></a>{% else %}<a onclick="return confirm('Разблокировать пользователя?')" href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Разблокировать"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
+                        <td>{% if person.is_staff %}<a onclick="return confirm('Снять с должности администратора?')" href=""><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Снять с должности"></i></a>{% else %}<a onclick="return confirm('Назначить на пост администратора?')" href="" data-bs-toggle="tooltip" data-bs-placement="top" title="Назначить на должность администратора?"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
+                        <td>{{ person.created_at }}</td>
+                        <td>{{ person.tg_id }}</td>
+                        <td>
+                            <div class="btn-group btn-group" role="group" aria-label="Basic example">
+                                <a href="" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
+                                <a onclick="return confirm('Вы действительно хотите удалить пользователя?')" href="" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
