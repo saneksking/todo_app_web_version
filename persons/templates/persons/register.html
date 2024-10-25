@@ -4,32 +4,38 @@
     <h1 class="text-primary text-center">Sign up</h1>
     <hr>
     <form method="post">
-    {% csrf_token %}
-  <div class="mb-3">
-    <label for="email" class="form-label">E-mail:</label>
-    <input required type="text" class="form-control" id="email" name="email">
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Пароль:</label>
-    <input required type="password" class="form-control" id="password" name="password">
-  </div>
+        {% csrf_token %}
         <div class="mb-3">
-    <label for="password_2" class="form-label">Подтверждение пароля:</label>
-    <input required type="password" class="form-control" id="password_2" name="password_2">
-  </div>
+            <label for="email" class="form-label">E-mail:</label>
+            <input required type="text" class="form-control" id="email" name="email">
+            {{ form.email.errors }}
+        </div>
         <div class="mb-3">
-    <label for="first_name" class="form-label">Имя:</label>
-    <input required type="text" class="form-control" id="first_name" name="first_name">
-  </div>
+            <label for="password" class="form-label">Пароль:</label>
+            <input required type="password" class="form-control" id="password" name="password">
+            {{ form.password.errors }}
+        </div>
         <div class="mb-3">
-    <label for="last_name" class="form-label">Фамилия:</label>
-    <input required type="text" class="form-control" id="last_name" name="last_name">
-  </div>
+            <label for="password_2" class="form-label">Подтверждение пароля:</label>
+            <input required type="password" class="form-control" id="password_2" name="password_2">
+            {{ form.password_2.errors }}
+        </div>
         <div class="mb-3">
-    <label for="tg_id" class="form-label">Телеграмм ID:</label>
-    <input type="text" class="form-control" id="tg_id" name="tg_id">
-  </div>
-  <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+            <label for="first_name" class="form-label">Имя:</label>
+            <input required type="text" class="form-control" id="first_name" name="first_name">
+            {{ form.first_name.errors }}
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Фамилия:</label>
+            <input required type="text" class="form-control" id="last_name" name="last_name">
+            {{ form.last_name.errors }}
+        </div>
+        <div class="mb-3">
+            <label for="tg_id" class="form-label">Телеграмм ID:</label>
+            <input type="text" class="form-control" id="tg_id" name="tg_id">
+            {{ form.tg_id.errors }}
+        </div>
+        <button type="submit" class="btn btn-success">Зарегистрироваться</button>
 </form>
 {% endblock %}
 {% block js %}

@@ -63,7 +63,7 @@ def register(request):
             }
             request.session['message'] = message
     else:
-        form = SignUpForm
+        form = SignUpForm()
     context = {
         'form': form,
         'message': message
