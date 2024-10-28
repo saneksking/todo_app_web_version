@@ -58,8 +58,12 @@ class Person(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-    def switcher(self):
+    def switcher_activity(self):
         self.is_active = not self.is_active
+        self.save()
+
+    def switcher_administration(self):
+        self.is_staff = not self.is_staff
         self.save()
 
 

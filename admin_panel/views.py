@@ -19,7 +19,20 @@ def admin_index(request):
 @user_passes_test(is_superuser)
 def person_change_activity(request, person_id):
     person = Person.objects.get(pk=person_id)
-    person.switcher()
+    person.switcher_activity()
+    person.save()
+    message = {
+        'type': 'success',
+        'text': f'Статус пользователя был успешно изменён!'
+    }
+    request.session['message'] = message
+    return redirect('admin_panel:admin_index')
+
+
+@user_passes_test(is_superuser)
+def person_change_admin_status(request, person_id):
+    person = Person.objects.get(pk=person_id)
+    person.switcher_administration()
     person.save()
     message = {
         'type': 'success',

@@ -15,6 +15,17 @@ def login_view(request):
         email = request.POST['email']
         password = request.POST['password']
         user = authenticate(request, email=email, password=password)
+        temp_user = Person.objects.filter(email=email).first()
+        if temp_user:
+            if not temp_user.is_active:
+                super_user = Person.objects.filter(is_staff=True).first()
+                msg = f'Ваш аккаунт заблокирован! Для разблокировки пишите на {super_user.email}.'
+                message = {
+                    'type': 'danger',
+                    'text': msg
+                }
+                request.session['message'] = message
+                return redirect('persons:login')
         if user is not None:
             login(request, user)
             message = {
@@ -26,7 +37,7 @@ def login_view(request):
         else:
             message = {
                 'type': 'danger',
-                'text': 'Неверныё e-mail или пароль',
+                'text': 'Неверныё e-mail или пароль.',
             }
             return render(request, 'persons/login.html', {'message': message})
     context = {
