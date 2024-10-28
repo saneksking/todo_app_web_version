@@ -58,6 +58,10 @@ class Person(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def switcher(self):
+        self.is_active = not self.is_active
+        self.save()
+
 
 class ToDo(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='todos')

@@ -52,7 +52,7 @@ def register(request):
             new_user.save()
             message = {
                 'type': 'success',
-                'text': f'Вы успешно зарегестрировались в системе!!.'
+                'text': f'Вы успешно зарегестрировались в системе!'
             }
             request.session['message'] = message
             return redirect('persons:login')
