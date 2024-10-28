@@ -36,7 +36,7 @@
                         <td>
                             <div class="btn-group btn-group" role="group" aria-label="Basic example">
                                 <a href="{% url 'admin_panel:admin_person_settings' person.id %}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
-                                <a onclick="return confirm('Вы действительно хотите удалить пользователя?')" href="" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
+                                <a onclick="return confirm('Вы действительно хотите удалить пользователя {{ person.email }}?')" href="{% url 'admin_panel:admin_person_delete' person.id %}" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
                             </div>
                         </td>
                     </tr>

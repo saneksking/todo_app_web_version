@@ -63,3 +63,15 @@ def admin_person_settings(request, person_id):
         'person': person,
     }
     return render(request, 'admin_panel/admin_person_settings.html', context)
+
+
+@user_passes_test(is_superuser)
+def admin_person_delete(request, person_id):
+    person = Person.objects.get(pk=person_id)
+    person.delete()
+    message = {
+        'type': 'success',
+        'text': f'Пользвоатель был успешно удалён!'
+    }
+    request.session['message'] = message
+    return redirect('admin_panel:admin_index')
