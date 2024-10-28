@@ -31,11 +31,11 @@
                         <td>{% if person.is_active %}<a onclick="return confirm('Заблокировать пользователя?')" href="{% url 'admin_panel:person_change_activity' person.id %}"><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Заблокировать"></i></a>{% else %}<a onclick="return confirm('Разблокировать пользователя?')" href="{% url 'admin_panel:person_change_activity' person.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Разблокировать"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
                         <td>{% if person.is_staff %}<a onclick="return confirm('Снять с должности администратора?')" href="{% url 'admin_panel:person_change_admin_status' person.id %}"><i class="bi bi-toggle-on fs-3 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Снять с должности"></i></a>{% else %}<a onclick="return confirm('Назначить на пост администратора?')" href="{% url 'admin_panel:person_change_admin_status' person.id %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Назначить на должность администратора?"><i class="bi bi-toggle-off fs-3 text-danger"></i></a>{% endif %}</td>
                         <td>{{ person.created_at }}</td>
-                        <td>{% if person.tg_id == '' %}Отсутствует{% else %}{{ person.tg_id }}{% endif %}</td>
+                        <td>{% if person.tg_id == '' or person.tg_id is None %}Отсутствует{% else %}{{ person.tg_id }}{% endif %}</td>
                         <td>{{ person.todos.count }}</td>
                         <td>
                             <div class="btn-group btn-group" role="group" aria-label="Basic example">
-                                <a href="" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
+                                <a href="{% url 'admin_panel:admin_person_settings' person.id %}" type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Настройки"><i class="bi bi-gear"></i></a>
                                 <a onclick="return confirm('Вы действительно хотите удалить пользователя?')" href="" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Удаление"> <i class="bi bi-trash"></i></a>
                             </div>
                         </td>

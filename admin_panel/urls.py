@@ -12,4 +12,5 @@ urlpatterns = [
          views.person_change_admin_status,
          name='person_change_admin_status'
          ),
+    path('admin-person-settings/<int:person_id>/', views.admin_person_settings, name='admin_person_settings'),
 ]

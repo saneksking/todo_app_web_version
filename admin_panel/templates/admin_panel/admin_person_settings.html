@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Настройки пользователя{% endblock %}
+
+{% block content %}
+    <h1 class="text-center display-4">Настройки пользователя {{ person.email }}</h1>
+    <hr>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#id_email, #id_first_name, #id_last_name, #id_tg_id').addClass('form-control')
+    </script>
+{% endblock %}

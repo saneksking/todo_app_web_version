@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect
 
 from admin_panel.decorators import is_superuser
+from admin_panel.forms import AdminSettingsForm
 from persons.models import Person
 
 
@@ -40,3 +41,25 @@ def person_change_admin_status(request, person_id):
     }
     request.session['message'] = message
     return redirect('admin_panel:admin_index')
+
+
+@user_passes_test(is_superuser)
+def admin_person_settings(request, person_id):
+    person = Person.objects.get(pk=person_id)
+    form = AdminSettingsForm(request.POST or None, instance=person)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            message = {
+                'type': 'success',
+                'text': f'Информация о пользователе была успешно изменена!'
+            }
+            request.session['message'] = message
+            return redirect('admin_panel:admin_index')
+        else:
+            form = AdminSettingsForm(request.POST)
+    context = {
+        'form': form,
+        'person': person,
+    }
+    return render(request, 'admin_panel/admin_person_settings.html', context)
