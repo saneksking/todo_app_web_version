@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/github/license/saneksking/todo_app_web_version)](https://github.com/saneksking/todo_app_web_version/blob/master/LICENSE)
 ---
 
-**TODO App web** - простое, удобное и доступное веб приложение для хранения и выполнения ваших задач.
+**TODO App web** - simple, comfortable and affordable web-application for kepting and compleating your tasks.
 
 ---
 
@@ -29,12 +29,12 @@
 - `exit`
 
 
-- Склонируйте проект
-- Перейдите в папку проекта
+- Clone project
+- Go to your project folder
 
 ---
 
-### Зависимости:
+### Requirements:
 
 - `python -m venv venv`
 - `source venv/bin/activate`
@@ -43,7 +43,7 @@
 
 ---
 
-### Создайте файл .env в вашем проекте:
+### Create file .env in your project:
 
 ```env
 SECRET_KEY="<your django secret key>"
@@ -55,12 +55,12 @@ DB_HOST="localhost"
 
 ---
 
-## Запуск:
+## Run:
 
 - `python manage migrate`
 - `python manage createsuperuser`
 - `python manage.py runserver`
-- Открыть в браузере можно [здесь](http://127.0.0.1:8000)
+- You can open in browser [here](http://127.0.0.1:8000)
 
 ---
 
