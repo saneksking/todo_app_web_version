@@ -1,4 +1,4 @@
-# ToDo App Web
+# ToDo App Web <sup>v0.0.1</sup>
 
 ---
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/saneksking/todo_app_web_version)](https://github.com/saneksking/todo_app_web_version/)
@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/github/license/saneksking/todo_app_web_version)](https://github.com/saneksking/todo_app_web_version/blob/master/LICENSE)
 ---
 
-**TODO App** - простое, удобное и доступное веб приложение для хранения и выполнения ваших задач.
+**TODO App web** - простое, удобное и доступное веб приложение для хранения и выполнения ваших задач.
 
 ---
 
